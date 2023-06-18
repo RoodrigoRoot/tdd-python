@@ -1,0 +1,20 @@
+
+
+
+
+send_request_temperature - Estamos testeando con el archivo test_weather (Casos de uso con la información de la temperatura)
+send_request_temperature - test_provider (Implementación para obtener la temperatura)
+
+test_weather:
+    Obtener la temperatura, min_temperature, max_temperature
+    notificar si hay un problema
+    si no envian el país, enviar un mensaje con advertencia.
+
+test_provider:
+    Valida el correcto funcionamiento de la función send_request_temperature
+
+
+test_cold_or_hot:
+
+    Mande un mensaje diciendo si hace frio o calor
+    Internamente usa la función send_request_temperature
