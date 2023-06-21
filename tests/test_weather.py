@@ -1,6 +1,10 @@
 from unittest import TestCase
 from unittest.mock import patch
-from weather.weather import get_temperatures, temperature_dto
+from weather.weather import (get_temperatures,
+                             temperature_dto,
+                             is_valid_city_and_country,
+                             is_valid_request_to_get_temperatures,
+                            )
 from datetime import date, datetime
 
 
@@ -72,3 +76,23 @@ class WeatherTestCase(TestCase):
         response = temperature_dto(self.expected_response_from_provider, message='OK', success=True)
 
         self.assertDictEqual(response, expected_response)
+
+    def test_is_valid_city_and_country_only_city(self):
+        city_country_validated = is_valid_city_and_country(city=self.city)
+        self.assertTrue(city_country_validated)
+
+    def test_is_valid_city_and_country(self):
+        city_country_validated = is_valid_city_and_country(city=self.city, country=self.country)
+        self.assertFalse(city_country_validated)
+
+    def test_validate_requests_success(self):
+
+        response = is_valid_request_to_get_temperatures(response=self.expected_response_from_provider)
+
+        self.assertFalse(response)
+
+    def test_validate_requests_fail(self):
+
+        response = is_valid_request_to_get_temperatures(response={})
+
+        self.assertTrue(response)
